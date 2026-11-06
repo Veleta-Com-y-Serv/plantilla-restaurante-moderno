@@ -1,0 +1,46 @@
+---
+// Opiniones: banda clara a todo el ancho. La primera opinión va como cita grande en serif con comillas del color de
+// acento; el resto, en columnas debajo, separadas por un filete. `testimonios` [{texto, autor, nota}] (`nota`: de
+// dónde viene, p. ej. «Google»). Sin estrellas ni puntuaciones. Sin opiniones, la sección no se pinta.
+import { seccion } from '../../data/site';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const lista = s ? s.testimonios.filter((t) => t && t.texto) : [];
+const [primera, ...resto] = lista;
+---
+
+{
+  s && primera && (
+    <Banda id={Astro.props.id} color="clara">
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      <figure class="cita-grande">
+        <blockquote>{primera.texto}</blockquote>
+        {(primera.autor || primera.nota) && (
+          <figcaption class="opinion-autor">
+            {primera.autor && <span>{primera.autor}</span>}
+            {primera.nota && <span class="opinion-nota">{primera.nota}</span>}
+          </figcaption>
+        )}
+      </figure>
+      {resto.length > 0 && (
+        <ul class="opiniones-resto">
+          {resto.map((t) => (
+            <li>
+              <figure>
+                <blockquote class="opinion-texto">{t.texto}</blockquote>
+                {(t.autor || t.nota) && (
+                  <figcaption class="opinion-autor">
+                    {t.autor && <span>{t.autor}</span>}
+                    {t.nota && <span class="opinion-nota">{t.nota}</span>}
+                  </figcaption>
+                )}
+              </figure>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Banda>
+  )
+}

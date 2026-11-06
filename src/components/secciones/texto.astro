@@ -1,0 +1,47 @@
+---
+// Apartado de texto genérico (`tipo: texto`): banda clara a todo el ancho. Con `imagen`, mitad de texto y mitad
+// de foto a sangre; sin ella, título a la izquierda y párrafos a la derecha. `items` {titulo, texto} en dos
+// columnas con un filete de acento y `cta` opcional.
+import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && (
+    <Banda id={Astro.props.id} color="clara" class="banda--sin-relleno" contenedor={false}>
+      <div class:list={[s.imagen ? 'mitades' : 'contenedor py-[var(--ritmo)] md:py-[var(--ritmo-md)]']}>
+        <div class:list={[s.imagen ? 'mitad-texto' : 'grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-24']}>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} class="titular--pegado" />
+          <div>
+            {parrafos(s.texto).length > 0 && (
+              <div class="parrafos">
+                {parrafos(s.texto).map((p) => <p>{p}</p>)}
+              </div>
+            )}
+            {s.items.length > 0 && (
+              <ul class="lista-marcas">
+                {s.items.map((it) => (
+                  <li>
+                    <p class="font-display text-2xl">{it.titulo}</p>
+                    {it.texto && <p class="mt-1 text-[.95rem] opacity-80">{it.texto}</p>}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.cta?.url && <a class="btn mt-9" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        </div>
+        {s.imagen && (
+          <div class="mitad-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1000} />
+          </div>
+        )}
+      </div>
+    </Banda>
+  )
+}

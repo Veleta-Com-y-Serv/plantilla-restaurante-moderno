@@ -1,0 +1,50 @@
+---
+// Especialidades: banda oscura con la cabeza (título a la izquierda, texto a la derecha) y debajo los `platos`
+// [{nombre, texto, precio, imagen}] como fotos a sangre de borde a borde (1 columna en móvil, 2-4 en escritorio),
+// con el nombre, el texto y el precio encima de la foto. Sin precio no hay precio; sin foto, el plato va en una
+// tarjeta de color. Sin platos, solo la cabeza (y sin cabeza ni platos, nada).
+import { seccion } from '../../data/site';
+import { altFicha } from '../../lib/seo';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const platos = s ? s.platos.filter((p) => p && p.nombre) : [];
+const n = Math.min(platos.length, 6);
+const hayCabeza = !!(s && (s.titulo || s.antetitulo || s.texto));
+---
+
+{
+  s && (hayCabeza || platos.length > 0) && (
+    <Banda id={Astro.props.id} color="oscura" class:list={[{ 'sin-abajo': platos.length > 0 }]} contenedor={false}>
+      {hayCabeza && (
+        <div class="contenedor cabeza">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+        </div>
+      )}
+      {platos.length > 0 && (
+        <ul class:list={['platillos', `platillos--${n}`]}>
+          {platos.map((p) => (
+            <li class:list={['platillo', { 'platillo--sin-foto': !p.imagen }]}>
+              {p.imagen && <Imagen src={p.imagen} alt={altFicha(p)} ancho={768} alto={1024} />}
+              <div class="platillo-pie">
+                <p class="platillo-linea">
+                  <span class="platillo-nombre">{p.nombre}</span>
+                  {p.precio && <span class="platillo-precio">{p.precio}</span>}
+                </p>
+                {p.texto && <p class="platillo-texto">{p.texto}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.cta?.url && (
+        <div class="contenedor py-10">
+          <a class="btn" href={s.cta.url} {...(/^https?:/.test(s.cta.url) && { rel: 'noopener', target: '_blank' })}>{s.cta.texto}</a>
+        </div>
+      )}
+    </Banda>
+  )
+}

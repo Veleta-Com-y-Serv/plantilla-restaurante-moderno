@@ -1,0 +1,74 @@
+---
+// Reservas: foto (`imagen`, una mesa puesta) a sangre hasta el borde izquierdo y, al lado, el titular, los pasos
+// (`items` {titulo, texto}) numerados con filetes, los botones (`cta`, normalmente WhatsApp, y el teléfono de
+// contacto), la `nota` (grupos…) y el formulario de reserva con día, hora y personas (mailto; la plataforma lo
+// conecta al publicar). Sin `cta`, el botón principal es el WhatsApp de contacto o, si no hay, el teléfono.
+import { seccion, site, tel, whatsapp } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const id = Astro.props.id;
+const s = seccion(id);
+const c = site.contacto;
+const principal = s?.cta?.url
+  ? s.cta
+  : c.whatsapp
+    ? { texto: 'Reservar por WhatsApp', url: whatsapp(c.whatsapp, `Hola, quiero reservar mesa en ${site.nombre}`) }
+    : c.telefono
+      ? { texto: `Llamar al ${c.telefono}`, url: tel(c.telefono) }
+      : null;
+const llamar = c.telefono && principal && !principal.url.startsWith('tel:') ? { texto: c.telefono, url: tel(c.telefono) } : null;
+const pasos = s ? s.items.filter((it) => it && it.titulo) : [];
+const externo = (u: string) => /^https?:/.test(u);
+---
+
+{
+  s && (
+    <Banda id={id} color="hueso" class="banda--sin-relleno" contenedor={false}>
+      <div class:list={[s.imagen ? 'mitades mitades--foto-izq' : 'contenedor py-[var(--ritmo)] md:py-[var(--ritmo-md)] max-w-4xl']}>
+        <div class:list={[{ 'mitad-texto': s.imagen }]}>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="titular--pegado" />
+          {pasos.length > 0 && (
+            <ol class="pasos">
+              {pasos.map((it, i) => (
+                <li>
+                  <span class="pasos-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <p class="pasos-titulo">{it.titulo}</p>
+                  {it.texto && <p class="pasos-texto">{it.texto}</p>}
+                </li>
+              ))}
+            </ol>
+          )}
+          {(principal || llamar) && (
+            <div class="botones">
+              {principal && (
+                <a class="btn" href={principal.url} {...(externo(principal.url) && { rel: 'noopener', target: '_blank' })}>
+                  {principal.url.includes('wa.me') && <Icono nombre="whatsapp" tam={18} />} {principal.texto}
+                </a>
+              )}
+              {llamar && (
+                <a class="btn-sec" href={llamar.url}>
+                  <Icono nombre="telefono" tam={18} /> {llamar.texto}
+                </a>
+              )}
+            </div>
+          )}
+          {s.nota && <p class="nota">{s.nota}</p>}
+          <div class="reservas-formulario">
+            <p class="reservas-formulario-titulo">O déjanos tu reserva aquí</p>
+            <FormularioContacto reserva prefijo={`r-${id}`} boton="Pedir mesa" asunto={`Reserva en ${site.nombre}`} />
+          </div>
+        </div>
+        {s.imagen && (
+          <div class="mitad-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={900} alto={1200} />
+          </div>
+        )}
+      </div>
+    </Banda>
+  )
+}

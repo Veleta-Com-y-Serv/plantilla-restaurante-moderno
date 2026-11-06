@@ -1,0 +1,54 @@
+---
+// Cabecera «limpia»: fija arriba, a todo el ancho, fondo hueso con un filete fino. Si la página empieza con la
+// portada con foto, va transparente y en blanco encima de la foto hasta que se baja (lo resuelve el CSS con :has).
+// Nombre en serif, enlaces discretos y botón de reservar en el color de acento. En móvil, menú plegable con
+// <details>. Script mínimo al final (sombra al bajar y cerrar el menú al pulsar). Aspecto en global.css.
+import { site } from '../data/site';
+import type { Enlace } from '../data/site';
+interface Props { variante?: string; cta?: Enlace | null }
+const { variante = 'limpia', cta = null } = Astro.props;
+---
+
+<header class={`cabecera cabecera--${variante}`} data-cabecera>
+  <div class="contenedor cabecera-fila">
+    <a href="/" class="marca" aria-label={`${site.nombre}, inicio`}>
+      {
+        site.logo ? (
+          <img src={site.logo} alt={site.nombre} class="marca-logo" width="160" height="40" />
+        ) : (
+          <span class="marca-nombre">{site.nombre}</span>
+        )
+      }
+    </a>
+    <nav class="cabecera-nav" aria-label="Menú principal">
+      {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+    </nav>
+    {cta && cta.url && <a href={cta.url} class="btn cabecera-cta">{cta.texto}</a>}
+    {
+      site.menu.length > 0 && (
+        <details class="menu-movil">
+          <summary>
+            <span class="menu-movil-icono" aria-hidden="true" />
+            <span>Menú</span>
+          </summary>
+          <nav class="menu-movil-panel" aria-label="Menú">
+            {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+            {cta && cta.url && <a href={cta.url} class="btn">{cta.texto}</a>}
+          </nav>
+        </details>
+      )
+    }
+  </div>
+</header>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.menu-movil a').forEach(function (a) {
+      a.addEventListener('click', function () { a.closest('details').open = false; });
+    });
+    var cabecera = document.querySelector('[data-cabecera]');
+    if (!cabecera) return;
+    function revisar() { cabecera.classList.toggle('con-sombra', window.scrollY > 24); }
+    revisar();
+    window.addEventListener('scroll', revisar, { passive: true });
+  });
+</script>

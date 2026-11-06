@@ -1,0 +1,72 @@
+[
+ {
+  "fichero": "fotos/hero.jpg",
+  "aspecto": "16:9",
+  "prompt": "Comedor de un restaurante contemporáneo español al anochecer, vacío: mesas de roble claro sin mantel con platos de cerámica blanca mate y copas finas, sillas curvas tapizadas en tela arena, paredes de estuco cálido, barra de terrazo al fondo con luz cálida, lámparas de papel colgantes, dos olivos en macetas grandes y un ventanal en arco a una calle del casco antiguo. Luz cálida y natural, aspecto realista, objetivo de 28 mm, poca profundidad de campo. Sin gente, sin texto, sin carteles ni logotipos."
+ },
+ {
+  "fichero": "fotos/sobre.jpg",
+  "aspecto": "3:4",
+  "prompt": "Cocina abierta de un restaurante moderno: manos de un cocinero con delantal blanco (sin cara) terminando un plato de pulpo a la brasa con patatas sobre un plato blanco mate en una encimera de roble claro y acero, brasa de encina encendida al fondo, sartenes de cobre colgadas y macetas de hierbas. Luz cálida de ventana, poca profundidad de campo, encuadre vertical. Sin texto, sin logotipos, sin personas reconocibles."
+ },
+ {
+  "fichero": "fotos/carta.jpg",
+  "aspecto": "16:9",
+  "prompt": "Vista cenital de una mesa de roble claro con platos para compartir en cerámica artesanal: espárragos verdes a la brasa con romesco, jamón cortado fino, ensalada de tomate de temporada con aceite, pimientos de Padrón, pan con aceite y dos copas de vino blanco, servilletas de lino. Luz natural suave de ventana, estilo limpio y actual, tonos arena y verde. Sin gente, sin texto, sin logotipos."
+ },
+ {
+  "fichero": "fotos/especialidad-1.jpg",
+  "aspecto": "3:4",
+  "prompt": "Primer plano de un arroz meloso con setas silvestres y alcachofas a la brasa, con hierbas frescas y un hilo de aceite de oliva, servido en un cuenco bajo de cerámica color piedra sobre una mesa de roble claro. Luz lateral de ventana, poca profundidad de campo, emplatado de restaurante moderno. Sin gente, sin texto, sin logotipos."
+ },
+ {
+  "fichero": "fotos/especialidad-2.jpg",
+  "aspecto": "3:4",
+  "prompt": "Primer plano de un lomo de lubina a la brasa con la piel dorada y crujiente sobre hinojo laminado fino y gajos de naranja, con aceite de hierbas, en un plato blanco mate artesanal sobre una mesa de roble claro. Luz natural suave, poca profundidad de campo, emplatado de restaurante moderno. Sin gente, sin texto, sin logotipos."
+ },
+ {
+  "fichero": "fotos/especialidad-3.jpg",
+  "aspecto": "3:4",
+  "prompt": "Primer plano de una torrija caramelizada con costra de azúcar tostado brillante, una quenelle de helado de vainilla y unas frambuesas, en un plato mate color arena sobre una mesa de roble claro. Luz natural suave, poca profundidad de campo, emplatado de postre de restaurante moderno. Sin gente, sin texto, sin logotipos."
+ },
+ {
+  "fichero": "fotos/galeria-1.jpg",
+  "aspecto": "1:1",
+  "prompt": "Barra de terrazo de un restaurante moderno al atardecer con dos copas de vino tinto y un platito de aceitunas, estanterías retroiluminadas con copas y botellas sin etiquetas legibles, luz cálida, poca profundidad de campo. Sin gente, sin texto, sin logotipos."
+ },
+ {
+  "fichero": "fotos/galeria-2.jpg",
+  "aspecto": "1:1",
+  "prompt": "Ensalada de tomates de temporada de colores (rojo, amarillo y verde) en rodajas gruesas con sal en escamas, albahaca fresca y aceite de oliva virgen extra, en un plato blanco mate sobre una mesa de roble claro, luz de día suave, ángulo ligeramente cenital. Sin gente, sin texto, sin logotipos."
+ },
+ {
+  "fichero": "fotos/galeria-3.jpg",
+  "aspecto": "1:1",
+  "prompt": "Terraza de restaurante a mediodía en una calle peatonal de un casco antiguo español: mesas de roble claro y sillas de ratán natural, sombrillas grandes color crudo, olivos en macetas de barro y fachadas de piedra al fondo, luz suave de mediodía, estilo limpio y actual. Sin gente, sin texto, sin carteles ni logotipos."
+ },
+ {
+  "fichero": "fotos/galeria-4.jpg",
+  "aspecto": "1:1",
+  "prompt": "Primer plano de una parrilla de carbón de encina en la cocina de un restaurante: brochetas de verduras y una pieza de solomillo asándose sobre las brasas, llamas suaves y algo de humo, fondo oscuro con luz cálida anaranjada, poca profundidad de campo. Sin gente, sin texto, sin logotipos, sin cabezas de animales."
+ },
+ {
+  "fichero": "fotos/galeria-5.jpg",
+  "aspecto": "1:1",
+  "prompt": "Rebanadas de pan de masa madre en una cestita forrada de lino junto a un cuenquito de cerámica con aceite de oliva virgen extra dorado y sal en escamas, sobre una mesa de roble claro de restaurante, luz natural de ventana, poca profundidad de campo. Sin gente, sin texto, sin logotipos."
+ },
+ {
+  "fichero": "fotos/galeria-6.jpg",
+  "aspecto": "1:1",
+  "prompt": "Porción de tarta de queso al horno con la superficie tostada y el centro cremoso en un plato gris mate, junto a una taza de café espresso, sobre una mesa de roble claro, luz natural suave, poca profundidad de campo. Sin gente, sin texto, sin logotipos."
+ },
+ {
+  "fichero": "fotos/mesa.jpg",
+  "aspecto": "3:4",
+  "prompt": "Mesa para dos puesta en un restaurante moderno por la noche: mesa de roble claro, platos de cerámica blanca mate, servilletas de lino, dos copas de vino finas, un jarroncito con una ramita de olivo y una vela encendida en un vaso de cristal, luz cálida y suave, comedor acogedor desenfocado al fondo. Sin gente, sin texto, sin logotipos."
+ },
+ {
+  "fichero": "fotos/fachada.jpg",
+  "aspecto": "4:3",
+  "prompt": "Fachada de un restaurante pequeño y moderno en la planta baja de un edificio antiguo de piedra en el centro de una ciudad española, a la hora azul: grandes cristaleras con carpintería de acero negro que dejan ver el comedor iluminado, puerta de madera, dos olivos en jardineras en la acera y calle empedrada. Fachada sin rótulo, sin texto legible, sin logotipos y sin gente."
+ }
+]

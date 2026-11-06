@@ -1,0 +1,41 @@
+---
+// Galería en mosaico a sangre: cabeza en el contenedor (título y botón a Instagram) y debajo las fotos de `galeria`
+// de borde a borde con una junta fina. En escritorio, tres columnas y la primera foto el doble de grande; en móvil,
+// dos columnas y la primera a todo el ancho. El botón usa `cta` o, si no hay, `redes.instagram`.
+import { seccion, site } from '../../data/site';
+import { altGaleria } from '../../lib/seo';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const boton = s?.cta?.url ? s.cta : site.redes.instagram ? { texto: 'Síguenos en Instagram', url: site.redes.instagram } : null;
+const fotos = s ? s.galeria.filter(Boolean) : [];
+---
+
+{
+  s && (
+    <Banda id={Astro.props.id} color="fondo" class="sin-abajo" contenedor={false}>
+      <div class="contenedor galeria-cabeza">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {boton && (
+          <a class="btn-sec" href={boton.url} {...(/^https?:/.test(boton.url) && { rel: 'noopener', target: '_blank' })}>
+            <Icono nombre="instagram" tam={18} /> {boton.texto}
+          </a>
+        )}
+      </div>
+      {fotos.length > 0 ? (
+        <ul class:list={['mosaico', { 'mosaico--uno': fotos.length === 1 }]}>
+          {fotos.map((foto, i) => (
+            <li>
+              <Imagen src={foto} alt={altGaleria(i)} ancho={i === 0 ? 1200 : 800} alto={i === 0 ? 1200 : 800} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="pb-[var(--ritmo)]" />
+      )}
+    </Banda>
+  )
+}

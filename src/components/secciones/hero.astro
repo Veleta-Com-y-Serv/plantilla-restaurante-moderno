@@ -1,0 +1,57 @@
+---
+// Portada a sangre: la foto (`imagen`) ocupa toda la pantalla de borde a borde, con un degradado suave para leer
+// el texto. Abajo a la izquierda, antetítulo, título enorme en serif, párrafo corto y dos botones; debajo, una
+// línea con los `items` (solo `titulo`: detalles cortos del local). Sin `imagen`, la portada es una banda del color
+// primario. Sin `cta`, el primer botón llama; sin `cta_secundario`, lleva al mapa.
+import { seccion, site, tel, mapa } from '../../data/site';
+import { altHero } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const principal = s?.cta?.url ? s.cta : c.telefono ? { texto: `Llamar al ${c.telefono}`, url: tel(c.telefono) } : null;
+const secundario = s?.cta_secundario?.url
+  ? s.cta_secundario
+  : c.direccion
+    ? { texto: 'Cómo llegar', url: mapa(c.direccion) }
+    : null;
+const externo = (u: string) => /^https?:/.test(u);
+const detalles = (s?.items ?? []).map((it) => String(it?.titulo ?? '').trim()).filter(Boolean);
+---
+
+{
+  s && (
+    <section id={id} class:list={['portada', { 'portada--foto': s.imagen }]}>
+      {s.imagen && (
+        <div class="portada-foto">
+          <Imagen src={s.imagen} alt={altHero()} ancho={1600} alto={900} prioridad={primera} />
+        </div>
+      )}
+      <div class="contenedor portada-texto">
+        {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+        <h1 class="portada-titulo">{s.titulo || site.nombre}</h1>
+        {s.texto && <p class="portada-parrafo">{s.texto}</p>}
+        {(principal || secundario) && (
+          <div class="botones">
+            {principal && (
+              <a class="btn" href={principal.url} {...(externo(principal.url) && { rel: 'noopener', target: '_blank' })}>
+                {principal.texto}
+              </a>
+            )}
+            {secundario && (
+              <a class="btn-sec" href={secundario.url} {...(externo(secundario.url) && { rel: 'noopener', target: '_blank' })}>
+                {secundario.texto}
+              </a>
+            )}
+          </div>
+        )}
+        {detalles.length > 0 && (
+          <ul class="portada-detalles">
+            {detalles.map((d) => <li>{d}</li>)}
+          </ul>
+        )}
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,110 @@
+---
+// Carta en banda clara a todo el ancho.
+// 1) Menú del día a sangre: foto (`imagen`) hasta el borde izquierdo y, al lado, el `menu_dia`
+//    {titulo, precio, texto (una línea por cosa)} sobre el color de acento. Sin foto, el bloque ocupa todo el ancho;
+//    sin menú y con foto, la foto va sola en una franja panorámica.
+// 2) Índice de categorías (fijo arriba al bajar, solo si hay más de una) y `platos` [{nombre, texto, precio,
+//    categoria, destacado}] agrupados por `categoria`, en el orden en que aparecen: la categoría a la izquierda y los
+//    platos en dos columnas con puntos hasta el precio. Sin precio no hay puntos ni precio; `destacado: true` pone la
+//    marca (texto en `marca_destacado`, por defecto «Recomendado»).
+import { seccion, agrupar, lineas } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import { slugify } from '../../lib/slug';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const id = Astro.props.id;
+const s = seccion(id);
+const grupos = s ? agrupar(s.platos, (p) => p.categoria) : [];
+const usados = new Set<string>();
+const anclas = grupos.map((g, i) => {
+  let a = `${id}-${slugify(g.grupo) || 'grupo-' + (i + 1)}`;
+  while (usados.has(a)) a += '-' + (i + 1);
+  usados.add(a);
+  return a;
+});
+const conIndice = grupos.filter((g) => g.grupo).length > 1;
+const marca = (s?.marca_destacado as string | undefined)?.trim() || 'Recomendado';
+const m = s?.menu_dia;
+const lineasMenu = lineas(m?.texto);
+---
+
+{
+  s && (
+    <Banda id={id} color="clara" contenedor={false}>
+      {(s.titulo || s.antetitulo || s.texto) && (
+        <div class="contenedor cabeza">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+        </div>
+      )}
+      {m && (
+        <div class:list={['menu-dia', { 'menu-dia--foto': s.imagen }]}>
+          {s.imagen && (
+            <div class="menu-dia-foto">
+              <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1280} alto={720} />
+            </div>
+          )}
+          <div class="menu-dia-bloque">
+            <div class="menu-dia-cabeza">
+              {m.titulo && <h3 class="menu-dia-titulo">{m.titulo}</h3>}
+              {m.precio && <p class="menu-dia-precio">{m.precio}</p>}
+            </div>
+            {lineasMenu.length > 0 && (
+              <ul class="menu-dia-lineas">
+                {lineasMenu.map((l) => <li>{l}</li>)}
+              </ul>
+            )}
+          </div>
+        </div>
+      )}
+      {!m && s.imagen && (
+        <div class="carta-foto">
+          <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1920} alto={820} />
+        </div>
+      )}
+      {grupos.length > 0 && (
+        <div class="contenedor">
+          {conIndice && (
+            <nav class="carta-indice" aria-label="Partes de la carta">
+              <ul>
+                {grupos.map((g, i) => g.grupo && <li><a href={`#${anclas[i]}`}>{g.grupo}</a></li>)}
+              </ul>
+            </nav>
+          )}
+          {grupos.map((g, i) => (
+            <section class="carta-grupo" id={anclas[i]} aria-label={g.grupo || undefined}>
+              {g.grupo ? <h3 class="carta-categoria">{g.grupo}</h3> : <span aria-hidden="true" />}
+              <ul class="platos">
+                {g.items.map((p) => (
+                  <li class="plato">
+                    <p class="plato-linea">
+                      <span class="plato-nombre">{p.nombre}</span>
+                      {p.precio && <span class="plato-puntos" aria-hidden="true" />}
+                      {p.precio && <span class="plato-precio">{p.precio}</span>}
+                    </p>
+                    {p.destacado && (
+                      <p class="plato-marca">
+                        <Icono nombre="estrella" tam={12} class="fill-current" /> {marca}
+                      </p>
+                    )}
+                    {p.texto && <p class="plato-texto">{p.texto}</p>}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      )}
+      {s.cta?.url && (
+        <div class="contenedor">
+          <p class="mt-10">
+            <a class="btn" href={s.cta.url} {...(/^https?:/.test(s.cta.url) && { rel: 'noopener', target: '_blank' })}>{s.cta.texto}</a>
+          </p>
+        </div>
+      )}
+    </Banda>
+  )
+}

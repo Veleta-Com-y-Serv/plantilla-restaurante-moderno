@@ -1,0 +1,52 @@
+---
+// La casa: foto (`imagen`) a sangre hasta el borde izquierdo y, al lado, antetítulo, título, `declaracion` en serif
+// cursiva con un filete de acento, `texto` en párrafos (línea en blanco entre ellos), `items` como lista numerada
+// con filetes finos y `cta` opcional. Sin foto, el texto ocupa la banda a dos columnas.
+import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((it) => it && it.titulo) : [];
+---
+
+{
+  s && (
+    <Banda id={Astro.props.id} color="fondo" class="banda--sin-relleno" contenedor={false}>
+      <div class:list={[s.imagen ? 'mitades mitades--foto-izq' : 'contenedor py-[var(--ritmo)] md:py-[var(--ritmo-md)]']}>
+        <div class:list={[s.imagen ? 'mitad-texto' : 'grid gap-8 lg:grid-cols-2 lg:gap-24']}>
+          <div>
+            <Titular antetitulo={s.antetitulo} titulo={s.titulo} class="titular--pegado" />
+            {s.declaracion && <p class="declaracion">{s.declaracion}</p>}
+          </div>
+          <div>
+            {parrafos(s.texto).length > 0 && (
+              <div class="parrafos">
+                {parrafos(s.texto).map((p) => <p>{p}</p>)}
+              </div>
+            )}
+            {items.length > 0 && (
+              <ul class="valores">
+                {items.map((it, i) => (
+                  <li>
+                    <span class="valores-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                    <p class="valores-titulo">{it.titulo}</p>
+                    {it.texto && <p class="valores-texto">{it.texto}</p>}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.cta?.url && <a class="btn mt-9" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        </div>
+        {s.imagen && (
+          <div class="mitad-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={900} alto={1200} />
+          </div>
+        )}
+      </div>
+    </Banda>
+  )
+}

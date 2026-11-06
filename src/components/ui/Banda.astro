@@ -1,0 +1,10 @@
+---
+// Banda a todo el ancho de la ventana (fondo pleno de borde a borde) con el contenido en el contenedor ancho
+// (96 rem, 16 px de margen en móvil). `color`: fondo | clara | hueso | oscura | acento.
+interface Props { id?: string; color?: string; class?: string; etiqueta?: string; contenedor?: boolean }
+const { id, color = 'fondo', class: clase = '', etiqueta, contenedor = true } = Astro.props;
+---
+
+<section id={id} class:list={['banda', `banda--${color}`, clase]} aria-label={etiqueta}>
+  {contenedor ? <div class="contenedor"><slot /></div> : <slot />}
+</section>

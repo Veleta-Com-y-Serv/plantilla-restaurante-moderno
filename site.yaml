@@ -1,0 +1,174 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas siempre planas (nunca una lista dentro de un elemento de lista). Precios siempre entre comillas.
+nombre: Olmo
+eslogan: Cocina de mercado y brasa de encina en el centro de Valladolid.
+sector: restaurante
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre en texto.
+colores:
+  primario: "#1f2b25"
+  acento: "#b5472f"
+  fondo: "#f6f3ed"
+  texto: "#1b1d1a"
+contacto:
+  telefono: "983 41 27 59"
+  email: reservas@restauranteolmo.es
+  direccion: Calle de la Platería 7, 47001 Valladolid (Valladolid)
+  horario: "De martes a sábado, de 13:30 a 16:00; viernes y sábado también de 20:30 a 23:30. Domingos, de 13:30 a 16:30."
+  whatsapp: "+34 644 12 75 90"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: La casa, url: "/#sobre" }
+  - { texto: Carta, url: "/#carta" }
+  - { texto: Fotos, url: "/#galeria" }
+  - { texto: Horario, url: "/#horario-ubicacion" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Reservar mesa, url: "/#reservas" }
+seo:
+  titulo: Olmo · Restaurante de cocina de mercado en Valladolid
+  descripcion: "Restaurante en el centro de Valladolid: cocina de mercado, brasa de encina, menú del día de martes a viernes y vinos de la tierra."
+  tipo: Restaurant
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: "Calle de la Platería, 7 · Valladolid"
+    titulo: Cocina de mercado, sin prisas
+    texto: "Producto de temporada, brasa de encina y una bodega con los vinos de aquí. A dos pasos de la Plaza Mayor."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Reservar mesa, url: "/#reservas" }
+    cta_secundario: { texto: Ver la carta, url: "/#carta" }
+    items:
+      - { titulo: Cocina de mercado }
+      - { titulo: Brasa de encina }
+      - { titulo: Menú del día de martes a viernes }
+      - { titulo: Terraza en la calle }
+
+  sobre:
+    activa: true
+    antetitulo: La casa
+    titulo: Un comedor tranquilo y una cocina abierta
+    declaracion: "Cocinamos lo que trae el mercado esa mañana, y lo terminamos a la brasa."
+    texto: |
+      Olmo abrió en 2021 en un bajo de la calle de la Platería. Lo llevan Clara, en la cocina, y Daniel, en la sala y la bodega.
+
+      Compramos cada día en el mercado del Val y a pequeños productores de la provincia. La carta cambia con la temporada y el menú del día, cada semana.
+
+      La brasa de encina está a la vista: desde muchas mesas se ve cómo se hace tu plato.
+    imagen: /fotos/sobre.jpg
+    items:
+      - { titulo: Producto de mercado, texto: "Verdura, pescado y carne que compramos cada mañana." }
+      - { titulo: Brasa de encina, texto: "Asados lentos y verduras con sabor a leña." }
+      - { titulo: Vinos de la tierra, texto: "Rueda, Cigales, Ribera y Toro, también por copas." }
+
+  especialidades:
+    activa: true
+    antetitulo: De la casa
+    titulo: Los platos que más nos piden
+    texto: "Están en la carta todo el año. El resto cambia con la temporada."
+    platos:
+      - { nombre: Arroz meloso de setas y alcachofa, texto: "Con setas de la provincia y alcachofa a la brasa.", precio: "18,50 €", imagen: /fotos/especialidad-1.jpg }
+      - { nombre: Lubina a la brasa, texto: "Sobre hinojo, naranja y aceite de hierbas.", precio: "22,00 €", imagen: /fotos/especialidad-2.jpg }
+      - { nombre: Torrija caramelizada, texto: "Con helado de vainilla y frutos rojos.", precio: "7,00 €", imagen: /fotos/especialidad-3.jpg }
+
+  carta:
+    activa: true
+    antetitulo: La carta
+    titulo: Para compartir, para ti y para el final
+    texto: "Avísanos de cualquier alergia o intolerancia: adaptamos casi todos los platos."
+    imagen: /fotos/carta.jpg
+    marca_destacado: Recomendado
+    menu_dia:
+      titulo: Menú del día
+      precio: "19,50 €"
+      texto: |
+        De martes a viernes, a mediodía
+        Primero, segundo y postre a elegir entre tres
+        Pan y agua o una copa de vino
+        Cambia cada semana con el mercado
+    platos:
+      - { nombre: Croquetas de jamón ibérico, texto: "Seis unidades, cremosas y hechas cada día.", precio: "9,50 €", categoria: Para compartir }
+      - { nombre: Tomate de temporada, texto: "Con ventresca, cebolleta y aceite de oliva virgen extra.", precio: "12,00 €", categoria: Para compartir, destacado: true }
+      - { nombre: Espárragos verdes a la brasa, texto: "Con salsa romesco.", precio: "11,00 €", categoria: Para compartir }
+      - { nombre: Pimientos de Padrón, precio: "7,50 €", categoria: Para compartir }
+      - { nombre: Arroz meloso de setas y alcachofa, texto: "Para una o dos personas.", precio: "18,50 €", categoria: Principales, destacado: true }
+      - { nombre: Lubina a la brasa, texto: "Con hinojo, naranja y aceite de hierbas.", precio: "22,00 €", categoria: Principales }
+      - { nombre: Pulpo a la brasa, texto: "Con patata asada y pimentón de la Vera.", precio: "21,00 €", categoria: Principales }
+      - { nombre: Lechazo a baja temperatura, texto: "Deshuesado y terminado a la brasa, con ensalada de lechuga y cebolleta.", precio: "24,00 €", categoria: Principales }
+      - { nombre: Steak tartar de vaca, texto: "Cortado a cuchillo, con yema curada y pan tostado.", precio: "19,50 €", categoria: Principales }
+      - { nombre: Torrija caramelizada, texto: "Con helado de vainilla.", precio: "7,00 €", categoria: Postres, destacado: true }
+      - { nombre: Tarta de queso al horno, precio: "6,50 €", categoria: Postres }
+      - { nombre: Helado del día, texto: "Pregúntanos el sabor de hoy.", categoria: Postres }
+      - { nombre: Copa de verdejo, texto: "D. O. Rueda.", precio: "3,80 €", categoria: Vinos por copas }
+      - { nombre: Copa de rosado, texto: "D. O. Cigales.", precio: "3,50 €", categoria: Vinos por copas }
+      - { nombre: Copa de tinto, texto: "D. O. Ribera del Duero.", precio: "4,20 €", categoria: Vinos por copas }
+
+  galeria:
+    activa: true
+    antetitulo: "@restauranteolmo"
+    titulo: La sala, la barra y la brasa
+    galeria:
+      - /fotos/galeria-3.jpg
+      - /fotos/galeria-2.jpg
+      - /fotos/galeria-1.jpg
+      - /fotos/galeria-4.jpg
+      - /fotos/galeria-5.jpg
+      - /fotos/galeria-6.jpg
+    cta: { texto: Síguenos en Instagram, url: "https://www.instagram.com/" }
+
+  reservas:
+    activa: true
+    antetitulo: Reservas
+    titulo: Reserva tu mesa
+    texto: "Los viernes y sábados por la noche se llena. Mejor reservar con un par de días."
+    imagen: /fotos/mesa.jpg
+    items:
+      - { titulo: Elige día y hora, texto: "Comidas de martes a domingo y cenas los viernes y sábados." }
+      - { titulo: Dinos cuántos sois, texto: "Y si hay alergias, niños o alguna celebración." }
+      - { titulo: Te confirmamos, texto: "Por WhatsApp o por teléfono, el mismo día." }
+    cta: { texto: Reservar por WhatsApp, url: "https://wa.me/34644127590?text=Hola%2C%20quiero%20reservar%20mesa" }
+    nota: "Grupos de más de 8 personas, mejor por teléfono."
+
+  horario-ubicacion:
+    activa: true
+    antetitulo: Ven a vernos
+    titulo: Horario y dónde estamos
+    texto: "En la calle de la Platería, entre la Plaza Mayor y la catedral. Aparcamiento público en la plaza Mayor, a tres minutos a pie."
+    imagen: /fotos/fachada.jpg
+    mapa: true
+    horario:
+      - { dia: Lunes, horas: Cerrado }
+      - { dia: Martes a jueves, horas: "13:30 – 16:00" }
+      - { dia: Viernes y sábado, horas: "13:30 – 16:00 y 20:30 – 23:30" }
+      - { dia: Domingo, horas: "13:30 – 16:30" }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo que dicen de nosotros
+    testimonios:
+      - { texto: "El arroz meloso, de lo mejor que hemos comido en Valladolid. Sala tranquila y un trato muy cercano.", autor: Lucía M., nota: Google }
+      - { texto: "Menú del día con producto de verdad y a buen precio. Repetimos cada semana.", autor: Javier R., nota: Google }
+      - { texto: "Celebramos un cumpleaños y estuvieron pendientes de todo, incluida la alergia de mi hija.", autor: Elena S. }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Antes de venir
+    preguntas:
+      - { pregunta: "¿Hace falta reservar?", respuesta: "Entre semana suele haber sitio. Los viernes y sábados por la noche, mejor reservar con un par de días." }
+      - { pregunta: "¿Tenéis opciones sin gluten?", respuesta: "Sí. Casi toda la carta se puede preparar sin gluten y tenemos pan sin gluten. Avísanos al reservar si eres celíaco." }
+      - { pregunta: "¿Hay menú del día el fin de semana?", respuesta: "No: el menú del día es de martes a viernes a mediodía. El fin de semana servimos la carta." }
+      - { pregunta: "¿Se puede ir con niños?", respuesta: "Claro. Tenemos tronas y medias raciones de algunos platos." }
+      - { pregunta: "¿Dónde puedo aparcar?", respuesta: "En el aparcamiento público de la plaza Mayor, a tres minutos andando." }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Escríbenos o llámanos
+    texto: "Reservas, grupos, celebraciones o cualquier pregunta. Te contestamos enseguida."

@@ -1,0 +1,32 @@
+---
+// Preguntas frecuentes: banda hueso a todo el ancho; el título a la izquierda (fijo al bajar en escritorio) y el
+// acordeón nativo <details> a la derecha, con filetes finos y un «+» que gira. Sin JavaScript.
+// Campos: `preguntas[]` (pregunta, respuesta). Sin preguntas no se pinta. Sirve de diseño para `tipo: preguntas`.
+import { seccion } from '../../data/site';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const preguntas = s ? s.preguntas.filter((p) => p && p.pregunta) : [];
+---
+
+{
+  s && preguntas.length > 0 && (
+    <Banda id={Astro.props.id} color="hueso">
+      <div class="preguntas-rejilla">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        <div>
+          {preguntas.map((p) => (
+            <details class="faq">
+              <summary>
+                <span>{p.pregunta}</span>
+                <span class="faq-signo" aria-hidden="true">+</span>
+              </summary>
+              {p.respuesta && <p class="faq-respuesta">{p.respuesta}</p>}
+            </details>
+          ))}
+        </div>
+      </div>
+    </Banda>
+  )
+}
